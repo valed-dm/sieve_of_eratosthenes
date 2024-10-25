@@ -16,27 +16,28 @@
 # В итоге у нас останутся только простые числа.
 
 def sieve_of_eratosthenes(num):
-    prime = [True for i in range(num + 1)]
-    p = 2
-    while p * p <= num:
+    if num < 2:
+        return []
 
-        # If prime[p] is not
-        # changed to 'False', then it is a prime
-        if prime[p]:
+    # Only consider odd numbers; assume all are prime initially
+    prime = [True] * ((num // 2) + 1)
+    prime[0] = False  # 1 is not prime
 
-            # Update all multiples of p
-            for i in range(p * p, num + 1, p):
-                prime[i] = False
-        p += 1
+    # Start from the first prime number, 3
+    for p in range(3, int(num**0.5) + 1, 2):
+        if prime[p // 2]:
+            # Mark multiples of `p`, starting from `p^2`, skipping even multiples
+            for i in range(p * p, num + 1, 2 * p):
+                prime[i // 2] = False
 
-    # Print all prime numbers
-    for p in range(2, num + 1):
-        if prime[p]:
-            print(p)
+    # Collect primes, handling `2` separately and only up to `num`
+    primes = [2] + [2 * i + 1 for i in range(1, len(prime)) if prime[i] and (2 * i + 1) <= num]
+    print(primes)
+    return primes
 
 
 if __name__ == '__main__':
-    N = 25
+    N = 30
     print("Following are the prime numbers smaller"),
     print("than or equal to", N)
     sieve_of_eratosthenes(num=N)
