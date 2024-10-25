@@ -1,6 +1,8 @@
 # Python program to print all
 # primes smaller than or equal to
 # N using Sieve of Eratosthenes
+# https://www.geeksforgeeks.org/sieve-of-eratosthenes/
+
 # Описание алгоритма
 #
 # Этот алгоритм назван в честь древнегреческого учёного Эратосфена Киренского.
